@@ -1,43 +1,38 @@
-// src/components/EventList.jsx
-import { useEffect, useState } from 'react';
-
-const EventList = () => {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/events');
-        if (!response.ok) {
-          throw new Error('فشل في تحميل الفعاليات');
-        }
-        const data = await response.json();
-        setEvents(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
-  if (loading) return <p>جارٍ تحميل الفعاليات...</p>;
-  if (error) return <p style={{ color: 'red' }}>خطأ: {error}</p>;
+const EventList = ({ events, onDelete }) => {
+  const handleDelete = (eventId, eventTitle) => {
+    if (window.confirm(`هل أنت متأكد من إلغاء الفعالية "${eventTitle}"؟`)) {
+      onDelete(eventId);
+    }
+  };
 
   return (
     <div>
-      <h2>الفعاليات الجامعية</h2>
-      <ul>
-        {events.map((event) => (
-          <li key={event.id}>
-            <strong>{event.title}</strong> — {event.date} في {event.location}
-          </li>
-        ))}
-      </ul>
+      <h2>الفعاليات</h2>
+      {events.length === 0 ? (
+        <p>لا توجد فعاليات حالياً</p>
+      ) : (
+        events.map(event => (
+          <div key={event.id} style={{ border: '1px solid #ccc', padding: '10px', margin: '10px 0', borderRadius: '5px' }}>
+            <h3>{event.title}</h3>
+            <p>📅 {event.date} | 📍 {event.location}</p>
+            {event.description && <p>{event.description}</p>}
+            <button
+              onClick={() => handleDelete(event.id, event.title)}
+              style={{
+                backgroundColor: '#dc3545',
+                color: 'white',
+                border: 'none',
+                padding: '5px 15px',
+                borderRadius: '3px',
+                cursor: 'pointer',
+                marginTop: '10px'
+              }}
+            >
+              ❌ إلغاء الفعالية
+            </button>
+          </div>
+        ))
+      )}
     </div>
   );
 };
