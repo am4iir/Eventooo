@@ -18,7 +18,7 @@ cd ../frontend && npm install
 
 # Run both
 npm run dev # in backend
-npm start  # in frontend
+npm run dev  # in frontend
 
 
 > ✏️ Replace `[Your University Name]` with your actual university!

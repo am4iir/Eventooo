@@ -1,22 +1,29 @@
-// backend/db.js
-const { Pool } = require('pg');
-require('dotenv').config();
+import { Pool } from "pg";
 
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+let poolInstance;
 
-// اختبار الاتصال
-pool.query('SELECT NOW()', (err) => {
-  if (err) {
-    console.error('❌ فشل الاتصال:', err.stack);
-  } else {
-    console.log('✅ PostgreSQL متصل!');
+export const getPool = async () => {
+  try {
+    if (!poolInstance) {
+      poolInstance = new Pool({
+        user: process.env.DB_USER,
+        host: 'localhost',
+        database: process.env.DB_NAME,
+        password: process.env.DB_PASSWORD,  
+        port: 5432,
+      });
+    }
+    return poolInstance;
+  } catch (err) {
+    console.error('Error creating pool:', err);
+    throw err;
   }
-});
+}
 
-module.exports = pool;
+export const pool = new Pool({
+  user: process.env.DB_USER,
+  host: 'localhost',
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,  
+  port: 5432,
+});
