@@ -27,7 +27,7 @@ npm run dev  # in frontend
 
 ### 🔹 4. **Commit & Push Everything**
 
-In Terminal (from the main `Eventoo` folder):
+In Terminal (from the main `Meetly` folder):
 
 ```bash
 git add .
