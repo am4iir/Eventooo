@@ -4,6 +4,8 @@ import whiteLogo from '../assets/whitelogo.png';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     // Set active section based on current path
@@ -13,6 +15,29 @@ const Navbar = () => {
     else if (path.includes("/about")) setActiveSection("about");
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < 10) {
+        // Always show navbar at the top
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down - only hide after scrolling past 100px
+        setIsVisible(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   const handleNavClick = (section) => {
     setActiveSection(section);
     setIsOpen(false);
@@ -20,16 +45,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-16 lg:px-36 py-5">
-      <div className="flex items-center justify-between">
+    <nav className={`fixed top-0 left-0 w-full z-50 px-6 md:px-10 lg:px-16 xl:px-24 py-4 md:py-5 transition-transform duration-500 ease-in-out ${
+      isVisible ? 'translate-y-0' : '-translate-y-full'
+    }`}>
+      <div className="flex items-center justify-between w-full">
         {/* Logo */}
         <a href="/" className="max-md:flex-1" onClick={() => handleNavClick("home")}>
-          <img src={whiteLogo} alt="Meetly Logo" className="w-36 h-auto" />
+          <img src={whiteLogo} alt="Meetly Logo" className="w-32 md:w-36 h-auto" />
         </a>
 
         {/* Navigation Links */}
         <div
-          className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium max-md:text-lg z-50 flex flex-col md:flex-row items-center max-md:justify-center gap-8 md:px-8 py-3 max-md:h-screen md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border border-gray-300/20 overflow-hidden transition-[width] duration-300 ${
+          className={`max-md:absolute max-md:top-0 max-md:left-0 max-md:font-medium max-md:text-lg z-50 flex flex-col md:flex-row items-center max-md:justify-center gap-6 md:gap-2 lg:gap-3 md:px-6 lg:px-8 py-3 max-md:h-screen md:rounded-full backdrop-blur bg-black/70 md:bg-white/10 md:border border-gray-300/20 overflow-hidden transition-[width] duration-300 ${
             isOpen ? "max-md:w-full" : "max-md:w-0"
           }`}
         >
@@ -43,7 +70,7 @@ const Navbar = () => {
 
           <a
             href="/"
-            className={`px-4 py-2 rounded-full transition-all duration-300 ${
+            className={`px-4 md:px-4 lg:px-5 py-2 rounded-full transition-all duration-300 text-sm md:text-base ${
               activeSection === "home"
                 ? "bg-gray-500/50 text-white"
                 : "text-white hover:bg-gray-500/30"
@@ -54,7 +81,7 @@ const Navbar = () => {
           </a>
           <a
             href="/events"
-            className={`px-4 py-2 rounded-full transition-all duration-300 ${
+            className={`px-4 md:px-4 lg:px-5 py-2 rounded-full transition-all duration-300 text-sm md:text-base ${
               activeSection === "events"
                 ? "bg-gray-500/50 text-white"
                 : "text-white hover:bg-gray-500/30"
@@ -65,7 +92,7 @@ const Navbar = () => {
           </a>
           <a
             href="/about"
-            className={`px-4 py-2 rounded-full transition-all duration-300 ${
+            className={`px-4 md:px-4 lg:px-5 py-2 rounded-full transition-all duration-300 text-sm md:text-base ${
               activeSection === "about"
                 ? "bg-gray-500/50 text-white"
                 : "text-white hover:bg-gray-500/30"
@@ -77,11 +104,11 @@ const Navbar = () => {
         </div>
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-4">
-          <button className="px-4 py-2 sm:px-7 sm:py-2 backdrop-blur bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 rounded-full font-medium text-white cursor-pointer">
+        <div className="flex items-center gap-2 md:gap-3 lg:gap-4">
+          <button className="px-3 py-2 md:px-5 lg:px-6 md:py-2 backdrop-blur bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 rounded-full font-medium text-white cursor-pointer text-sm md:text-base">
             Create Event
           </button>
-          <button className="px-4 py-2 sm:px-7 sm:py-2 backdrop-blur bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 rounded-full font-medium text-white cursor-pointer">
+          <button className="px-3 py-2 md:px-5 lg:px-6 md:py-2 backdrop-blur bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 rounded-full font-medium text-white cursor-pointer text-sm md:text-base">
             Login
           </button>
 

@@ -38,24 +38,24 @@ function Homepage() {
         <DarkVeil />
         
         {/* Hero Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4 md:px-8 lg:px-16">
           <BlurText
             text="Discover. Connect."
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white text-center mb-3 sm:mb-4 font-alata"
+            className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white text-center mb-3 sm:mb-4 md:mb-4 lg:mb-5 font-alata"
             delay={100}
             animateBy="words"
             direction="top"
           />
           <BlurText
             text="Experience Campus Life."
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center mb-6 sm:mb-8 font-alata"
+            className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white text-center mb-6 sm:mb-8 md:mb-6 lg:mb-8 font-alata"
             delay={100}
             animateBy="words"
             direction="top"
           />
           <TextType
             text="Join events, meet new people, and make the most out of your university life."
-            className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-300 text-center max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl font-alata px-4"
+            className="text-base sm:text-lg md:text-lg lg:text-xl xl:text-2xl text-gray-300 text-center max-w-sm sm:max-w-md md:max-w-xl lg:max-w-2xl xl:max-w-3xl font-alata px-4"
             typingSpeed={30}
             initialDelay={500}
             pauseDuration={1000}
@@ -63,15 +63,17 @@ function Homepage() {
             loop={false}
             showCursor={false}
           />
-          
-          {/* Scroll Indicator */}
+        </div>
+        
+        {/* Scroll Indicator - Bottom of Hero */}
+        <div className="absolute bottom-8 md:bottom-10 lg:bottom-12 left-1/2 transform -translate-x-1/2 z-10">
           <button
             onClick={() => scrollToSection('features')}
-            className="mt-12 sm:mt-16 animate-bounce cursor-pointer bg-transparent border-none"
+            className="animate-bounce cursor-pointer bg-transparent border-none"
             aria-label="Scroll down"
           >
             <svg
-              className="w-8 h-8 sm:w-10 sm:h-10 text-white/70 hover:text-white transition-colors"
+              className="w-8 h-8 sm:w-10 sm:h-10 md:w-9 md:h-9 lg:w-10 lg:h-10 text-white/70 hover:text-white transition-colors"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -89,16 +91,16 @@ function Homepage() {
       <section
         id="features"
         ref={(el) => (sectionsRef.current[0] = el)}
-        className={`min-h-screen w-full bg-gradient-to-b from-black via-purple-900/20 to-black py-20 px-4 transition-all duration-1000 ${
+        className={`min-h-screen w-full bg-gradient-to-b from-black via-purple-900/20 to-black py-16 md:py-20 lg:py-24 px-4 md:px-8 lg:px-12 transition-all duration-1000 flex items-center ${
           visibleSections.has('features') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}
       >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white text-center mb-16">
+        <div className="max-w-7xl mx-auto w-full">
+          <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-12 md:mb-14 lg:mb-16">
             Why Choose Meetly?
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 xl:gap-12">
             {[
               {
                 icon: "🎯",
@@ -118,14 +120,14 @@ function Homepage() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className={`bg-white/5 backdrop-blur-lg rounded-2xl p-8 hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 ${
+                className={`bg-white/5 backdrop-blur-lg rounded-2xl p-6 md:p-7 lg:p-8 hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 ${
                   visibleSections.has('features') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className="text-6xl mb-4">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
-                <p className="text-gray-300 text-lg">{feature.description}</p>
+                <div className="text-5xl md:text-5xl lg:text-6xl mb-4 md:mb-4 lg:mb-5">{feature.icon}</div>
+                <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-white mb-3 md:mb-4">{feature.title}</h3>
+                <p className="text-gray-300 text-base md:text-base lg:text-lg leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -136,16 +138,16 @@ function Homepage() {
       <section
         id="stats"
         ref={(el) => (sectionsRef.current[1] = el)}
-        className={`min-h-screen w-full bg-gradient-to-b from-black via-indigo-900/20 to-black py-20 px-4 flex items-center transition-all duration-1000 ${
+        className={`min-h-screen w-full bg-gradient-to-b from-black via-indigo-900/20 to-black py-16 md:py-20 lg:py-24 px-4 md:px-8 lg:px-12 flex items-center transition-all duration-1000 ${
           visibleSections.has('stats') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}
       >
         <div className="max-w-7xl mx-auto w-full">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white text-center mb-16">
+          <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-12 md:mb-14 lg:mb-16">
             Join Our Community
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-16">
             {[
               { number: "5000+", label: "Active Students" },
               { number: "500+", label: "Events Hosted" },
@@ -158,10 +160,10 @@ function Homepage() {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <div className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+                <div className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-3 md:mb-4">
                   {stat.number}
                 </div>
-                <div className="text-xl sm:text-2xl text-gray-300">{stat.label}</div>
+                <div className="text-lg sm:text-xl md:text-xl lg:text-2xl text-gray-300">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -172,18 +174,18 @@ function Homepage() {
       <section
         id="cta"
         ref={(el) => (sectionsRef.current[2] = el)}
-        className={`min-h-screen w-full bg-gradient-to-b from-black via-purple-900/30 to-black py-20 px-4 flex items-center transition-all duration-1000 ${
+        className={`min-h-screen w-full bg-gradient-to-b from-black via-purple-900/30 to-black py-16 md:py-20 lg:py-24 px-4 md:px-8 lg:px-12 flex items-center transition-all duration-1000 ${
           visibleSections.has('cta') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-8">
+          <h2 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-white mb-6 md:mb-7 lg:mb-8">
             Ready to Start Your Journey?
           </h2>
-          <p className="text-xl sm:text-2xl text-gray-300 mb-12">
+          <p className="text-lg sm:text-xl md:text-xl lg:text-2xl text-gray-300 mb-10 md:mb-11 lg:mb-12 max-w-3xl mx-auto px-4">
             Don't miss out on the best campus experiences. Join Meetly today!
           </p>
-          <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-4 px-12 rounded-full text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
+          <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 md:py-4 px-10 md:px-12 rounded-full text-lg md:text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
             Get Started Now
           </button>
         </div>
