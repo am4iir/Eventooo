@@ -11,7 +11,6 @@ const Navbar = () => {
     if (path === "/") setActiveSection("home");
     else if (path.includes("/events")) setActiveSection("events");
     else if (path.includes("/about")) setActiveSection("about");
-    else if (path.includes("/contact")) setActiveSection("contact");
   }, []);
 
   const handleNavClick = (section) => {
@@ -74,17 +73,6 @@ const Navbar = () => {
             onClick={() => handleNavClick("about")}
           >
             About
-          </a>
-          <a
-            href="/contact"
-            className={`px-4 py-2 rounded-full transition-all duration-300 ${
-              activeSection === "contact"
-                ? "bg-gray-500/50 text-white"
-                : "text-white hover:bg-gray-500/30"
-            }`}
-            onClick={() => handleNavClick("contact")}
-          >
-            Contact
           </a>
         </div>
 
