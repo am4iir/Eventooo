@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import whiteLogo from '../assets/whitelogo.png';
 
 const Navbar = () => {
@@ -8,7 +9,7 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    // Set active section based on current path
+    
     const path = window.location.pathname;
     if (path === "/") setActiveSection("home");
     else if (path.includes("/events")) setActiveSection("events");
@@ -108,16 +109,32 @@ const Navbar = () => {
           <button className="px-3 py-2 md:px-5 lg:px-6 md:py-2 backdrop-blur bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 rounded-full font-medium text-white cursor-pointer text-sm md:text-base">
             Create Event
           </button>
-          <button className="px-3 py-2 md:px-5 lg:px-6 md:py-2 backdrop-blur bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 rounded-full font-medium text-white cursor-pointer text-sm md:text-base">
-            Login
-          </button>
+          
+          {/* Clerk Authentication */}
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="px-3 py-2 md:px-5 lg:px-6 md:py-2 backdrop-blur bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 rounded-full font-medium text-white cursor-pointer text-sm md:text-base">
+                Login
+              </button>
+            </SignInButton>
+          </SignedOut>
+          
+          <SignedIn>
+            <UserButton 
+              appearance={{
+                elements: {
+                  avatarBox: "w-8 h-8 md:w-10 md:h-10"
+                }
+              }}
+            />
+          </SignedIn>
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden w-8 h-8 cursor-pointer text-white flex items-center justify-center"
+            className="md:hidden w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 rounded-full cursor-pointer text-white flex items-center justify-center transition-all duration-300 shadow-lg"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
           </button>
