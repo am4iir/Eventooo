@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import DarkVeil from "../components/DarkVeil";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import BlurText from "../components/BlurText";
 import TextType from "../components/TextType";
 
@@ -116,6 +117,21 @@ function Homepage() {
                 icon: "🎓",
                 title: "Grow",
                 description: "Enhance your university experience with diverse activities and networking."
+              },
+              {
+                icon: "🎉",
+                title: "Celebrate",
+                description: "Make unforgettable memories with friends and fellow students."
+              },
+              {
+                icon: "🚀",
+                title: "Join the Movement",
+                description: "Be part of a vibrant community that celebrates campus life."
+              },
+              {
+                icon: "🌟",
+                title: "Make the Most of Your Campus Life",
+                description: "Experience the best of campus life with Meetly."
               }
             ].map((feature, index) => (
               <div
@@ -123,7 +139,7 @@ function Homepage() {
                 className={`bg-white/5 backdrop-blur-lg rounded-2xl p-6 md:p-7 lg:p-8 hover:bg-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 ${
                   visibleSections.has('features') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
                 }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="text-5xl md:text-5xl lg:text-6xl mb-4 md:mb-4 lg:mb-5">{feature.icon}</div>
                 <h3 className="text-xl md:text-2xl lg:text-2xl font-bold text-white mb-3 md:mb-4">{feature.title}</h3>
@@ -190,6 +206,9 @@ function Homepage() {
           </button>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
 
       <Navbar />
     </div>
