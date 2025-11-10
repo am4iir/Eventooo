@@ -13,9 +13,6 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <img src={whiteLogo} alt="Eventooo Logo" className="w-36 h-auto" />
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Discover and create amazing campus events. Connect with fellow students and make unforgettable memories.
-            </p>
             {/* Social Media */}
             <div className="flex gap-4 pt-2">
               <a 
@@ -151,7 +148,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="mailto:support@eventooo.com" className="text-gray-400 hover:text-purple-400 transition-colors duration-300 text-sm flex items-center gap-2">
-                  <span>📧</span> support@eventooo.com
+                  <span>📧</span> support@Meetly.com
                 </a>
               </li>
             </ul>
@@ -179,7 +176,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
-            © {currentYear} Eventooo. All rights reserved.
+            © {currentYear} Meetly. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="/privacy" className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
