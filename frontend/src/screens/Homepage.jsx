@@ -118,21 +118,6 @@ function Homepage() {
                 title: "Grow",
                 description: "Enhance your university experience with diverse activities and networking."
               },
-              {
-                icon: "🎉",
-                title: "Celebrate",
-                description: "Make unforgettable memories with friends and fellow students."
-              },
-              {
-                icon: "🚀",
-                title: "Join the Movement",
-                description: "Be part of a vibrant community that celebrates campus life."
-              },
-              {
-                icon: "🌟",
-                title: "Make the Most of Your Campus Life",
-                description: "Experience the best of campus life with Meetly."
-              }
             ].map((feature, index) => (
               <div
                 key={index}

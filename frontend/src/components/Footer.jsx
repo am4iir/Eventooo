@@ -100,7 +100,7 @@ const Footer = () => {
             <h3 className="text-white font-bold text-base sm:text-lg mb-3 sm:mb-4">Support</h3>
             <ul className="space-y-2 sm:space-y-3">
               <li>
-                <a href="/help" className="text-gray-400 hover:text-purple-400 active:text-purple-300 transition-colors duration-300 text-sm sm:text-sm inline-flex items-center gap-2 py-1">
+                <a href="/help-center" className="text-gray-400 hover:text-purple-400 active:text-purple-300 transition-colors duration-300 text-sm sm:text-sm inline-flex items-center gap-2 py-1">
                   <span>❓</span> Help Center
                 </a>
               </li>
