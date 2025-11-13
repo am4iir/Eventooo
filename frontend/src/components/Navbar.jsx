@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { Link, useLocation } from "react-router-dom";
 import whiteLogo from '../assets/whitelogo.png';
 
 const Navbar = () => {
@@ -7,14 +8,14 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const location = useLocation();
 
   useEffect(() => {
-    
-    const path = window.location.pathname;
+    const path = location.pathname;
     if (path === "/") setActiveSection("home");
     else if (path.includes("/events")) setActiveSection("events");
     else if (path.includes("/about")) setActiveSection("about");
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +43,9 @@ const Navbar = () => {
   const handleNavClick = (section) => {
     setActiveSection(section);
     setIsOpen(false);
-    window.scrollTo(0, 0);
+    if (section === "home") {
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
@@ -51,9 +54,9 @@ const Navbar = () => {
     }`}>
       <div className="flex items-center justify-between w-full">
         {/* Logo */}
-        <a href="/" className="max-md:flex-1" onClick={() => handleNavClick("home")}>
+        <Link to="/" className="max-md:flex-1" onClick={() => handleNavClick("home")}>
           <img src={whiteLogo} alt="Meetly Logo" className="w-32 md:w-36 h-auto" />
-        </a>
+        </Link>
 
         {/* Navigation Links */}
         <div
@@ -69,19 +72,20 @@ const Navbar = () => {
             ✕
           </button>
 
-          <a
-            href="/"
+          <Link
+            to="/"
             className={`px-4 md:px-4 lg:px-5 py-2 rounded-full transition-all duration-300 text-sm md:text-base ${
               activeSection === "home"
                 ? "bg-gray-500/50 text-white"
                 : "text-white hover:bg-gray-500/30"
+                
             }`}
             onClick={() => handleNavClick("home")}
           >
             Home
-          </a>
-          <a
-            href="/events"
+          </Link>
+          <Link
+            to="/events"
             className={`px-4 md:px-4 lg:px-5 py-2 rounded-full transition-all duration-300 text-sm md:text-base ${
               activeSection === "events"
                 ? "bg-gray-500/50 text-white"
@@ -90,9 +94,9 @@ const Navbar = () => {
             onClick={() => handleNavClick("events")}
           >
             Events
-          </a>
-          <a
-            href="/about"
+          </Link>
+          <Link
+            to="/about"
             className={`px-4 md:px-4 lg:px-5 py-2 rounded-full transition-all duration-300 text-sm md:text-base ${
               activeSection === "about"
                 ? "bg-gray-500/50 text-white"
@@ -101,7 +105,7 @@ const Navbar = () => {
             onClick={() => handleNavClick("about")}
           >
             About
-          </a>
+          </Link>
         </div>
 
         {/* Right Side Actions */}
