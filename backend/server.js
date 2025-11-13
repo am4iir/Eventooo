@@ -17,12 +17,12 @@ app.use(express.json());
 
 // In-memory data storage (temporary solution until PostgreSQL is set up)
 
-// GET: جلب جميع الفعاليات
-// POST: إنشاء فعالية جديدة
+
+
 
 app.listen(PORT, async () => {
   await getPool().then(() => {
-    console.log("Database successfully connected mirouuuu");
+    console.log("Database successfully connected ");
     console.log(`Server is running on http://localhost:${PORT}`);
   });
   
